@@ -9,8 +9,8 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    bat 'mvn sonar:sonar'
-                    bat 'sonar.exclusions=**/*.main'
+                    bat 'mvn sonar:sonar \
+                    -Dsonar.exclusions=**/*.java'
                 }
             }
         }
