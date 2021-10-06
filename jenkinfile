@@ -1,5 +1,23 @@
 pipeline {
     agent any
+    stages {
+        stage('Clone sources') {
+            steps {
+                git url: 'https://github.com/anjaliisinghh1/employeeBackend.git'
+            }
+        }
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    bat'mvn sonar:sonar -Dsonar.projectKey=employee -Dsonar.host.url=http://localhost:9000 -Dsonar.login=e5d1e98f77a8e2c69270556f94a6d73733158e10'
+                }
+            }
+        }
+        stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
 
     stages {
         stage('Requirement') {
