@@ -1,22 +1,35 @@
 pipeline {
     agent any
+
     stages {
-        stage('Clone sources') {
+        stage('Requirement') {
             steps {
-                git branch: 'bad-code', url: 'https://github.com/tkgregory/sonarqube-jacoco-code-coverage.git'
+                echo 'Requirement gathering'
             }
         }
-        stage('SonarQube analysis') {
+        
+        stage('Planning') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat 'mvn sonar:sonar'
-                }
+                echo 'Planning'
             }
         }
-        stage("Quality gate") {
+        
+        stage('Designing') {
             steps {
-                waitForQualityGate abortPipeline: true
+                echo 'Designing'
             }
         }
-    }
-}
+        
+        stage('Developing') {
+            steps {
+                echo 'Developing'
+            }
+        }
+      
+        stage('Testing') {
+            steps {
+                echo 'Testing'
+            }
+        }
+  }
+  }
