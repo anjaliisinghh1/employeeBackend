@@ -10,7 +10,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     bat 'mvn sonar:sonar'
-                    bat 'sonar.exclusions=test/**/*.java'
+                        'sonar.exclusions=/**/*.java'
                 }
             }
         }
